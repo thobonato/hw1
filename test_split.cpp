@@ -45,5 +45,18 @@ Node * makeList(std::vector<int> const & content)
 
 int main(int argc, char* argv[])
 {
+  Node* list = makeList({1,2,3,4});
+	Node* odds = nullptr;
+	Node* evens = nullptr;
+    
+    split(list, odds, evens);
 
+    for(int i = 0; i < 2; i++){
+        std::cout << "odds->val " << odds->value << std::endl;
+        std::cout << "evens->val " << evens->value << std::endl;
+        evens = evens->next;
+        odds = odds->next;
+    }
+    std::cout << "list" << list << std::endl;
+    // std::cout << "list->value" << list->value << std::endl;
 }
