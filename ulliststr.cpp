@@ -34,6 +34,8 @@ void ULListStr::push_back(const std::string& val){
     item->val[0] = val;
     item->last = 0;
     item->last = 1;
+    item->next = nullptr;
+    item->prev = nullptr;
     this->head_ = item;
     this->tail_ = item;
   }
@@ -68,13 +70,17 @@ void ULListStr::pop_back(){
     this->tail_->last--;
   } 
   else{ // case 2: pop front having to deallocate an item
-    Item* tmp = this->tail_;
-    this->tail_ = this->tail_->prev;
-    
+    Item* tmp = this->tail_;  
     // if popping front will erase whole array, 
-    if (this->tail_ == nullptr){
+    if (this->tail_->prev == nullptr){
+      std::cout << "nullified!!!" << std::endl;
       this->head_ = nullptr;
+      this->tail_ = nullptr;
     }
+    else {
+      this->tail_ = this->tail_->prev;
+    }
+
     delete tmp;
   }
   this->size_--;
@@ -86,8 +92,10 @@ void ULListStr::push_front(const std::string& val){
   if (this->head_ == NULL){
     Item* item = new Item();
     item->val[0] = val;
-    item->last = 0;
+    item->first = 0;
     item->last = 1;
+    item->next = nullptr;
+    item->prev = nullptr;
     this->head_ = item;
     this->tail_ = item;
   }
@@ -105,7 +113,9 @@ void ULListStr::push_front(const std::string& val){
     item->next = this->head_;
 
     // place it in the linked list
-    this->head_->prev = item;
+    if (this->head_ != NULL){
+      this->head_->prev = item;
+    }
     this->head_ = item;
   }
   this->size_++;
@@ -122,12 +132,21 @@ void ULListStr::pop_front(){
   } 
   else{ // case 2: pop front having to deallocate an item
     Item* tmp = this->head_;
-    this->head_ = this->head_->next;
     
+    std::cout << "trying to nullify..." << std::endl;
+    std::cout << "this->head_" << this->head_ << std::endl;
+    std::cout << "this->size_" << this->size_ << std::endl;
+
     // if popping front will erase whole array, 
-    if (this->head_ == nullptr){
+    if (this->head_->next == nullptr){
+      std::cout << "nullified!!!" << std::endl;
+      this->head_ = nullptr;
       this->tail_ = nullptr;
     }
+    else{
+      this->head_ = this->head_->next;
+    }
+
     delete tmp;
   }
   this->size_--;

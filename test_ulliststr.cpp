@@ -9,33 +9,63 @@
 
 int main(int argc, char* argv[])
 {
-  std::cout << "running" << std::endl;
+
   ULListStr list = ULListStr();
   
-  // insert front threeitemadd
-  // Value of: checkListContent(populatedList, contents)
-  //   Actual: false (List content mismatch: Expected value at index 0 was 768, but element was actually 
-  // Expected value at index 1 was 1024, but element was actually 
-  // Expected value at index 2 was 1536, but element was actually 
-  // )
-  // Expected: true
+  //  ListRemove.AtARRSIZEPlusOne 
+  list.push_back("oldfront");
+	list.push_back("oldback");
 
-  
-  // insert back then front
-  // grade_ulliststr.cpp:205: Failure
-  // Value of: checkListContent(&list, {"fred", "bob"})
-  //   Actual: false (List content mismatch: Expected value at index 0 was fred, but element was actually 
-  // Expected value at index 1 was bob, but element was actually 
-  // )
+	std::cout << "list size " << list.size() << std::endl;
+  for(size_t index = 0; index < list.size(); ++index){
+    std::cout << list.get(index) << ", ";
+  }
+  std::cout << std::endl;
 
-  list.push_back("bob");
-	list.push_front("fred");
+	// this should create an empty slot at the front of the list, and the new element can be put there
+	list.pop_front();
+	list.push_front("newfront");
 
-  
+	std::cout << "list size " << list.size() << std::endl;
+  for(size_t index = 0; index < list.size(); ++index){
+    std::cout << list.get(index) << ", ";
+  }
+  std::cout << std::endl;
 
-  // head3 elements
-  // "foo", "BAR", "baz"
-  // pop_front();
+	// now, a new element struct should get created at the front
+	list.pop_back();
+	list.push_front("cloudfront");
+
+	std::cout << "list size " << list.size() << std::endl;
+  for(size_t index = 0; index < list.size(); ++index){
+    std::cout << list.get(index) << ", ";
+  }
+  std::cout << std::endl;
+
+	// now, the original head should get deleted
+	list.pop_back();
+
+	std::cout << "list size " << list.size() << std::endl;
+  for(size_t index = 0; index < list.size(); ++index){
+    std::cout << list.get(index) << ", ";
+  }
+  std::cout << std::endl;
+
+	list.pop_front();
+
+	std::cout << "list size " << list.size() << std::endl;
+  for(size_t index = 0; index < list.size(); ++index){
+    std::cout << list.get(index) << ", ";
+  }
+  std::cout << std::endl;
+
+	list.push_front("newback");
+
+  std::cout << "list size " << list.size() << std::endl;
+  for(size_t index = 0; index < list.size(); ++index){
+    std::cout << list.get(index) << ", ";
+  }
+  std::cout << std::endl;
 
   // ListRemove.SongOfBackAndFront
   // tried to free something impossible
@@ -43,13 +73,6 @@ int main(int argc, char* argv[])
   //   Actual: false (List content mismatch: Expected value at index 0 was newback, but element was actually 
   // )
 
-  std::cout << "list.back()" << list.back() << std::endl;
-  std::cout << "list.front()" << list.front() << std::endl;
-
-  int sz = list.size();
-  std::cout << "list size " << sz << std::endl;
-  for(size_t index = 0; index < sz; ++index){
-    std::cout << list.get(index) << std::endl;
-  }
+ 
 
 }
